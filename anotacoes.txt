@@ -1,0 +1,16 @@
+Criar um host:
+edite o arquivo: /etc/apache2/sites-available/000-default.conf
+
+insira o seguinte:
+<VirtualHost *:80>
+	ServerName nomeDaUrl.dev
+	DocumentRoot edereçoDoProjetoNaMáquina
+</VirtualHost>
+
+Edite o arquivo: /etc/hosts
+
+insira o seguinte
+127.0.0.1   urlCriadaAcima
+
+Restart apache
+
