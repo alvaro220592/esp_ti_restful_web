@@ -14,3 +14,14 @@ insira o seguinte
 
 Restart apache
 
+Deu pra rodar essa url com o servidor embutido do artisan, especificando a porta 80: 'sudo php artisan serve --port 80'
+
+Aula 03 - Criação do banco de dados
+	No arquivo config/database.php, na parte do mysql tem 'prefix', que é o prefixo a ser colocado nos nomes das tabelas se quiser.
+
+	Foram criadas as migrations
+
+	Obs: Caso dê problema no tamanho do campo de uma tabela na hora do migrate, pode limitar o email da tabela users pra 100: $table->string('email', 100)->unique();
+
+	foi criada a model e a migration pra produtos
+
