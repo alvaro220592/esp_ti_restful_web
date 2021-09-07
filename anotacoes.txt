@@ -25,3 +25,20 @@ Aula 03 - Criação do banco de dados
 
 	foi criada a model e a migration pra produtos
 
+aula 04 - seeders e factories
+	será usada seeder pra fazer um usuario padrão e factory pra popular o banco com produtos.
+
+	php artisan make:seeder UsersTableSeeder
+	php artisan make:seeder ProductsTableSeeder
+
+	php artisan make:factory ProductFactory
+
+	Pra rodar a seeder e a factory não precisa entrar no php tinker.
+
+	Os dados pra produtos foram definidos na factory.
+	Na seeder de produtos foi definida a quantidade("Product::factory()->count(20)->create();"). 
+	Na seeder padrão DatabaseSeeder foram chamadas as seeders de usuario e produtos:
+		"$this->call(UsersTableSeeder::class);"
+    	"$this->call(ProductsTableSeeder::class);"
+	No terminal foi dado o comando php artisan db:seed. esse comando roda a seeder DatabaseSeeder, a qual chamará as outras seeders como descrito acima
+
