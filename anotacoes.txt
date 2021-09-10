@@ -42,3 +42,7 @@ aula 04 - seeders e factories
     	"$this->call(ProductsTableSeeder::class);"
 	No terminal foi dado o comando php artisan db:seed. esse comando roda a seeder DatabaseSeeder, a qual chamará as outras seeders como descrito acima
 
+aula 05 - fazendo a api
+
+	foi criada uma rota e um controller pra produtos e esse controller ficou numa pasta chamada Api
+
