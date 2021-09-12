@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    private $product;
+
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return Product::all();
+        return response()->json(['result' => $this->product->all()]);
     }
 
     /**
@@ -26,7 +33,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $validacao = validator($data, $this->product->rules());
+
+        if ($validacao->fails()) {
+            $mensagens = $validacao->messages();
+
+            return response()->json(['mensagem' => $mensagens]);
+        }
+
+        if (! $insert = $this->product->create($data))
+            return response()->json(['erro' => 'Erro ao iserir os dados'], 500);
+        
+        return response()->json([
+            'mensagem' => 'Dados inseridos com sucesso',
+            'dados' => $insert
+        ]);
+        
     }
 
     /**

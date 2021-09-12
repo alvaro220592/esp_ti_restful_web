@@ -46,3 +46,17 @@ aula 05 - fazendo a api
 
 	foi criada uma rota e um controller pra produtos e esse controller ficou numa pasta chamada Api
 
+	A rota foi criada com o verbo "resource": 
+		Route::resource('products', ProductController::class);
+
+		Obs: na parte "ProductController::class" não precisa colocar o nome do método e nem o colchete de array. O que vai definir qual o método a ser usado é o verbo http selecionado no postman. 
+
+aula 06 - listando todos os produtos
+	foi criado um método construtor instanciando a model de produtos pra não ter que fazer isso a cada método, tipo "$product = new Product;"
+
+aula 07 - criando e validando dados
+	O status HTTP 500 significa erro interno
+	na model de produtos foi inserido o método rules() pra validar
+	pra regra de validação pra unique: 'campo' => 'unique:nomeTabela'
+
+	CONTINUAR DO MINUTO 6
