@@ -59,4 +59,28 @@ aula 07 - criando e validando dados
 	na model de produtos foi inserido o método rules() pra validar
 	pra regra de validação pra unique: 'campo' => 'unique:nomeTabela'
 
-	CONTINUAR DO MINUTO 6
+aula 8 - mostrando produto - show
+
+	public function show(Product $product)
+    {
+        return response()->json(['Produto' => $product]);
+    }
+
+	quando coloca (Product $product) em vez de ($id), não precisa fazer assim:
+	public function show(Product $product)
+    {
+        $product = $this->product->findOrFail($product->id);
+        return response()->json(['Produto' => $product]);
+    }
+
+	pra tratar um erro de produto não encontrado:
+
+	public function show($id)
+    {
+        if (! $product = $this->product->find($product->id)){
+			return response()->json(['Erro' => 'Produto não encontrado']);	
+		}else{
+        	return response()->json(['Produto' => $product]);
+		}
+    }
+	IMPORTANTE: tem q ser 'find' e não 'findOrFail'

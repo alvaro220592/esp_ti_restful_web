@@ -38,18 +38,16 @@ class ProductController extends Controller
 
         if ($validacao->fails()) {
             $mensagens = $validacao->messages();
-
-            return response()->json(['mensagem' => $mensagens]);
+            return response()->json(['Erro' => $mensagens]);
         }
-
+        
         if (! $insert = $this->product->create($data))
-            return response()->json(['erro' => 'Erro ao iserir os dados'], 500);
+            return response()->json(['Erro' => "Erro ao inserir os dados"], 500);
         
         return response()->json([
-            'mensagem' => 'Dados inseridos com sucesso',
-            'dados' => $insert
+            'Mensagem' => "Dados inseridos com sucesso",
+            'Dados' => $insert,
         ]);
-        
     }
 
     /**
@@ -58,9 +56,13 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        if (! $product = $this->product->find($id)){
+            return response()->json(['Erro' => 'Produto não encontrado']);
+        }else{
+            return response()->json(['Produto' => $product]);
+        }
     }
 
     /**

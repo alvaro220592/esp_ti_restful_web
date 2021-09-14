@@ -13,8 +13,8 @@ class Product extends Model
 
     public function rules(){
         return [
-            'name' => 'required|min:3|max:100|unique:products',
-            'description' => 'required|min:5|max:1000'
+            'name' => ['required', 'min:3', 'max:100', 'unique:products'],
+            'description' => ['required', 'min:5', 'max:1000'],
         ];
     }
 }
