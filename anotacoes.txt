@@ -84,3 +84,36 @@ aula 8 - mostrando produto - show
 		}
     }
 	IMPORTANTE: tem q ser 'find' e não 'findOrFail'
+
+aula 09 - alterar e validar
+	se tem 2 campos unique e eu quero alterar só 1, vai dar erro no outro, pois é único e o sistema tá alterando automaticamente pra mesma coisa se eu nao mexer.
+	Pra resolver isso, basta ir na rule, ir até o campo desejado e deixar assim:
+	
+	MODEL***
+	public function rules($id = ''){ // o id tá vazio pq é opcional
+        return [
+            'name' => ['required', 'min:3', 'max:100', "unique:products,name,{id},id"], //OBS IMPORTANTE: não pode ter espaços depois das vírgulas "unique:products,name,{id},id"
+            'description' => ['required', 'min:5', 'max:1000'],
+        ];
+    }
+
+	CONTROLLER***
+	$validacao = validator($dados, $this->product->rules($id));
+        if ($validacao->fails()){
+            return response()->json(["Erro" => $validacao->messages()]);
+        }
+
+	*** ORIGINAIS ***
+	MODEL***
+	public function rules(){
+        return [
+            'name' => ['required', 'min:3', 'max:100', 'unique:products'],
+            'description' => ['required', 'min:5', 'max:1000'],
+        ];
+    }
+
+	CONTROLLER***
+	$validacao = validator($dados, $this->product->rules());
+        if ($validacao->fails()){
+            return response()->json(["Erro" => $validacao->messages()]);
+        }

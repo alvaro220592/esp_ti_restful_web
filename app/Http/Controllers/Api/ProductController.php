@@ -72,9 +72,30 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $produto = $this->product->find($id);
+
+        if (! $produto){
+            return response()->json(["Erro no update" => "Produto não encontrado"]);
+        }
+
+        $dados = $request->all();
+
+        $validacao = validator($dados, $this->product->rules($id));
+        if ($validacao->fails()){
+            return response()->json(["Erro" => $validacao->messages()]);
+        }
+
+        if(! $update = $produto->update($dados)){
+            return response()->json(['Erro' => "Erro ao alterar os dados"], 500);
+        }else{
+            return response()->json([
+                'Mensagem' => "Dados alterados com sucesso",
+                "Resultado" => $update
+            ]);
+        }
+        
     }
 
     /**
@@ -83,8 +104,16 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        if(! $produto = $this->product::find($id)){
+            return response()->json(['Erro' => "Produto não encontrado"]);
+        }
+
+        if(! $delete = $produto->delete()){
+            return response()->json(['Erro' => 'Não foi possível excluir o registro'], 500);
+        }else{
+            return response()->json(['Mensagem' => "Produto excluído com sucesso", "Resultado" => $delete]);
+        }
     }
 }
