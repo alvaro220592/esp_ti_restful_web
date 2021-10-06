@@ -122,3 +122,6 @@ aula 10 - versionar a api
 	pra isso cria-se um grupo de rotas pra onde as rotas existentes vão pra dentro
 	e esse grupo vai ter um prefixo com o nome da versão.
 	É recomendável criar as pastas das versões dntro de contollers/api e então cada controller vai pra sua pasta e tem seu namespace alterado com a pasta correspondente. Não pode esquecer de especificar o endereço correto do controller no arquivo de rotas
+
+aula 11 - limitar requisições na api:
+	em kernel.php tem uma parte "'api' => []" em que tem um numero limite de requisições que pode ser aterado. Caso o nº de requisições ultrapasse, vai ficar bloqueado por 1 minuto

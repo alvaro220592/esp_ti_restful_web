@@ -31,13 +31,13 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
         $data = $request->all();
-        $validacao = validator($data, $this->product->rules());
+        $validacao = validator($data, $this->product->rules($id));
 
         if ($validacao->fails()) {
-            $mensagens = $validacao->messages();
+            $mensagens = $validacao->messages;
             return response()->json(['Erro' => $mensagens]);
         }
         
