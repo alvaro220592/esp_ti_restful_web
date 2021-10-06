@@ -10,6 +10,8 @@ class ProductController extends Controller
 {
     private $product;
 
+    private $paginas = 5;
+
     public function __construct(Product $product)
     {
         $this->product = $product;
@@ -22,7 +24,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return response()->json(['result' => $this->product->all()]);
+        /* return response()->json(['result' => $this->product->all()]); */
+        return response()->json(['result' => $this->product->paginate($this->paginas)]);
     }
 
     /**
@@ -114,6 +117,18 @@ class ProductController extends Controller
             return response()->json(['Erro' => 'Não foi possível excluir o registro'], 500);
         }else{
             return response()->json(['Mensagem' => "Produto excluído com sucesso", "Resultado" => $delete]);
+        }
+    }
+
+    public function search(Request $request){
+        $dados = $request->all();
+
+        $produtos = $this->product->search($dados, $this->paginas);
+
+        if(count($produtos) > 0){
+            return response()->json(["Resultados" => $produtos]);
+        }else{
+            return response()->json(['Mensagem' => "Nenhum produto encontrado"]);
         }
     }
 }

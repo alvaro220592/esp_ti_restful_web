@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\ProductController;
 
 Route::group(['prefix' => 'v1'], function(){
+    Route::post('products/search', [ProductController::class, 'search']);
     Route::resource('products', ProductController::class);
 });
 

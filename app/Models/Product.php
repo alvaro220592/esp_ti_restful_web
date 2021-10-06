@@ -17,4 +17,10 @@ class Product extends Model
             'description' => ['required', 'min:5', 'max:1000'],
         ];
     }
+    
+    public function search($dados, $paginas){
+        return $this->where('name', 'like', "%{$dados['busca']}%")
+                    ->orWhere('description', 'like', "%{$dados['busca']}%")
+                    ->paginate(5);
+    }
 }

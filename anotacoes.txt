@@ -125,3 +125,12 @@ aula 10 - versionar a api
 
 aula 11 - limitar requisições na api:
 	em kernel.php tem uma parte "'api' => []" em que tem um numero limite de requisições que pode ser aterado. Caso o nº de requisições ultrapasse, vai ficar bloqueado por 1 minuto
+
+aula 12 - PAGINAR E PESQUISAR DADOS
+	na paginação, ao invés de por exempĺo trazer os dados com o "->all()", se faz com "->paginate(nº de paginas)" e no próprio postman, ao fazer a requisição, mostra os links das páginas e o conteúdo paginado
+
+	Pesquisar: pra isso foi feito o metodo search na model e uma rota post com 'search' na url
+	na url depois do 'search' tem o '?' e depois a chave e valor: 
+		localhost:8000/api/v1/products/search?busca=au
+		ou
+		localhost:8000/api/v1/products/search?busca=au&page=3
